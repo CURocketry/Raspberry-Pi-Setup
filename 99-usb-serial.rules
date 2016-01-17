@@ -1,0 +1,25 @@
+##############
+# UDEV RULES #
+##############
+#
+# /etc/udev/rules.d
+#
+# Linux USB devices are assigned names in the order they are plugged in.
+# This file provides symbolic linking for USB devices based on unique device
+# properties, ensuring persistent naming for programatic uses.
+#
+# ADDING NEW ENTRIES
+#######
+# To determine the Vendor ID and Product ID, run:
+# $ lsub
+# The output will look something like:
+# Bus 001 Device 001: ID {VENDORID}:{PRODUCTID} FTDI FT232 USB-Serial (UART) IC
+###
+# To determine the serial number, run:
+# $ udevadm info -a -n /dev/ttyUSB0 | grep '{serial}' | head -n1
+#
+#
+#######################
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="A603H5XW", SYMLINK+="xbee"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="FTFRNHG3", SYMLINK+="adagps"
