@@ -6,6 +6,8 @@ sudo ./raspi-config.sh
 #
 # Copy the udev ttyusb aliases
 sudo cp ../99-usb-serial.rules /etc/udev/rules.d
+# Copy the gpsd default configuration
+sudo cp ../gpsd /etc/default
 
 # Install required programs
 sudo apt-get -q -qq update
@@ -36,6 +38,14 @@ cd wiringPi
 # Enable I2C
 gpio load i2c
 
+# Install zlog
+cd ~/Desktop/lib
+wget https://github.com/HardySimpson/zlog/archive/latest-stable.tar.gz
+tar -zxvf zlog-latest-stable.tar.gz
+cd zlog-latest-stable
+make
+sudo make install
+
 # Copy a good vimrc
 cd ~
 git clone https://github.com/mahsu/vimrc
@@ -48,5 +58,10 @@ mkdir -p ~/Desktop/dev
 cd ~/Desktop/dev
 git clone https://github.com/curocketry/launchvehiclecontroller2016
 git clone https://github.com/mahsu/raspberrypi-adafruit10dof
+
+# Install Adafruit 10dof library
+cd raspberrypi-adafruit10dof
+make all
+sudo make install
 
 echo "Reboot the machine to complete setup"
