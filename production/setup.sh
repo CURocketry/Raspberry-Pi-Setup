@@ -6,13 +6,11 @@ sudo ../raspi-config.sh
 #
 # Copy the udev ttyusb aliases
 sudo cp ../99-usb-serial.rules /etc/udev/rules.d
-# Copy the gpsd default configuration
-sudo cp ../gpsd /etc/default
 
 # Install required programs
 sudo apt-get -q -qq update
-#sudo apt-get -q -y dist-upgrade
-#sudo rpi-update
+sudo apt-get -q -y dist-upgrade
+sudo rpi-update
 sudo apt-get -y install git vim build-essential g++ python python-dev
 sudo apt-get -y install gpsd libgps-dev gpsd-clients python-gps libi2c-dev
 
@@ -55,10 +53,15 @@ sudo chmod +x setup.sh
 # Clone development repos
 mkdir -p ~/Desktop/dev
 cd ~/Desktop/dev
-git clone https://github.com/curocketry/launchvehiclecontroller2016
+
 
 git clone https://github.com/mahsu/RaspberryPi-Adafruit10DOF
 cd RaspberryPi-Adafruit10DOF
+make all
+sudo make install
+
+git clone https://github.com/curocketry/launchvehiclecontroller2016
+cd launchvehiclecontroller2016
 make all
 sudo make install
 
